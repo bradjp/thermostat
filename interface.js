@@ -2,7 +2,12 @@ $(document).ready(function() {
   var thermostat = new Thermostat();
   updateTemperature();
 
-  $('#temperature-up').on('click', function() { // event listener
+  $.get('http://localhost:4567', function(data) {
+    thermostat.temperature = data //JSON.parse(data).temp;
+    $('#temperature').text(thermostat.temperature);
+  });
+
+  $('#temperature-up').click(function() { // event listener
     thermostat.up(); // update model
     updateTemperature(); // update view
   })
@@ -34,15 +39,21 @@ $(document).ready(function() {
     $('#temperature').attr('class', thermostat.energyUsage());
   };
 
+  function displayWeather(city) {
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
+    var token = '&appid=a3d9eb01d4de82b9b8d0849ef604dbed';
+    var units = '&units=metric';
+    $.get(url + token + units, function(data) {
+      $('#current-temperature').text(city + " is: " + data.main.temp);
+    })
+  }
+
+  displayWeather('London');
+
   $('#select-city').submit(function(event) {
     event.preventDefault();
     var city = $('#current-city').val();
-    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
-      $('#current-temperature').text(data.main.temp);
-    })
+    displayWeather(city);
   })
-
-
-
-
 })
+

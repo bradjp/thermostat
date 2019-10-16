@@ -9,3 +9,13 @@
 .high-usage {
   color: red;
 }
+
+body {
+  background: url('https://images.unsplash.com/photo-1543393470-b2c833b98dce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body {
+  color: pink
+}
