@@ -7,6 +7,10 @@ $(document).ready(function() {
     $('#temperature').text(thermostat.temperature);
   });
 
+  
+  $.post('http://localhost:4567/temp')
+
+
   $('#temperature-up').click(function() { // event listener
     thermostat.up(); // update model
     updateTemperature(); // update view
